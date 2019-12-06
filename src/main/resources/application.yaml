@@ -1,0 +1,36 @@
+spring.application.name: simpleApplication
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/journey
+    username: uaiso
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+camunda:
+  bpm:
+    webapp:
+      index-redirect-enabled: true
+    admin-user:
+      id: root
+      password: root
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+    metrics:
+      enabled: false
+      db-reporter-activate: false
+    database:
+      type: postgres
+      #schema-update: create-drop
+
+#camunda.bpm.auto-deployment-enabled: false
+

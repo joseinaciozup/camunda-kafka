@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_07dzyy1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.4">
+  <bpmn:process id="Process_SimpleExtenralTask" name="SimpleExternalTask" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_14dsuge</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="ServiceTask_0om9pdv" name="External Task Test" camunda:type="external" camunda:topic="externalTaskTopic">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="kafkaTopic01" value="test" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_14dsuge</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hkq1bp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_14dsuge" sourceRef="StartEvent_1" targetRef="ServiceTask_0om9pdv" />
+    <bpmn:endEvent id="EndEvent_083xjoq">
+      <bpmn:incoming>SequenceFlow_1179n28</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0hkq1bp" sourceRef="ServiceTask_0om9pdv" targetRef="IntermediateThrowEvent_10675yp" />
+    <bpmn:sequenceFlow id="SequenceFlow_1179n28" sourceRef="IntermediateThrowEvent_10675yp" targetRef="EndEvent_083xjoq" />
+    <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_10675yp">
+      <bpmn:incoming>SequenceFlow_0hkq1bp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1179n28</bpmn:outgoing>
+      <bpmn:signalEventDefinition signalRef="Signal_00fnj6n" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_00fnj6n" name="testedesinal" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_SimpleExtenralTask">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0om9pdv_di" bpmnElement="ServiceTask_0om9pdv">
+        <dc:Bounds x="276" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_14dsuge_di" bpmnElement="SequenceFlow_14dsuge">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="276" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_083xjoq_di" bpmnElement="EndEvent_083xjoq">
+        <dc:Bounds x="503" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hkq1bp_di" bpmnElement="SequenceFlow_0hkq1bp">
+        <di:waypoint x="376" y="120" />
+        <di:waypoint x="423" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1179n28_di" bpmnElement="SequenceFlow_1179n28">
+        <di:waypoint x="459" y="120" />
+        <di:waypoint x="503" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0zo534n_di" bpmnElement="IntermediateThrowEvent_10675yp">
+        <dc:Bounds x="423" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
