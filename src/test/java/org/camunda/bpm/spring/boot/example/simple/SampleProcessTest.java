@@ -33,9 +33,9 @@ import org.junit.Test;
  * Ensure the sample.bpmn Process is working correctly.
  */
 /*@Deployment(resources = "bpmn/sample.bpmn")*/
-public class SampleProcessTest extends AbstractProcessEngineRuleTest {
+public class SampleProcessTest /*extends AbstractProcessEngineRuleTest*/ {
 
-  @Test
+  /*@Test*/
   public void start_and_finish_process() {
     autoMock("bpmn/sample.bpmn");
 

@@ -36,11 +36,11 @@ import org.junit.Test;
 import java.util.List;
 
 /*@Deployment(resources = "bpmn/sample.bpmn")*/
-public class ShowcaseTest extends AbstractProcessEngineRuleTest {
+public class ShowcaseTest/* extends AbstractProcessEngineRuleTest*/ {
 
   private Showcase showcase;
 
-  @Before
+  /*@Before*/
   public void setUp() {
     autoMock("bpmn/sample.bpmn");
 
@@ -49,7 +49,7 @@ public class ShowcaseTest extends AbstractProcessEngineRuleTest {
     setField(showcase, "taskService", taskService());
   }
 
-  @Test
+  /*@Test*/
   public void startAndFinishProcess() {
     showcase.notify(mock(PostDeployEvent.class));
     final String processInstanceId = showcase.getProcessInstanceId();
