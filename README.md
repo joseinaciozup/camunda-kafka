@@ -9,6 +9,8 @@ This module uses automatic BPMN deployment
 - PostgreSQL
 - Docker
 - Spring Boot
+- Kafka
+- Camunda
 
 ## Instalação
 
