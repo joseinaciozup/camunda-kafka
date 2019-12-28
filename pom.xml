@@ -17,6 +17,9 @@
   <modules>  
     <module>spring-kafka</module>
     <module>camunda-bpm-spring-boot-starter-example-simple</module>
+    <module>apiservice1</module>
+    <module>apiservice2</module>
+    <module>apiservice3</module>
   </modules>
 
   <dependencies>
