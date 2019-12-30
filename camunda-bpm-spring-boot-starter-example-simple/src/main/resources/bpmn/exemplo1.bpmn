@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
-  <bpmn:process id="exemplo1" isExecutable="true">
+  <bpmn:process id="exemplo1" name="exemplo1" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_0o9l2l3</bpmn:outgoing>
     </bpmn:startEvent>
@@ -23,15 +23,15 @@
       <bpmn:incoming>SequenceFlow_0sclxaf</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0sclxaf" sourceRef="Task_1bpnpvz" targetRef="EndEvent_1e3m3yc" />
-    <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:expression="${apiService1Task}">
+    <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:delegateExpression="${apiService1Task}">
       <bpmn:incoming>SequenceFlow_0o9l2l3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ko65gz</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:expression="${apiService2Task}">
+    <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:delegateExpression="${apiService2Task}">
       <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_12aedgw</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:expression="${apiService3Task}">
+    <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:delegateExpression="${apiService3Task}">
       <bpmn:incoming>SequenceFlow_0gdb43n</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0sclxaf</bpmn:outgoing>
     </bpmn:serviceTask>
