@@ -1,10 +1,10 @@
-package br.com.itau.apiservice1;
+package br.com.itau.apiservice2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Apiservice1ApplicationTests {
+class Apiservice2ApplicationTests {
 
 	@Test
 	void contextLoads() {

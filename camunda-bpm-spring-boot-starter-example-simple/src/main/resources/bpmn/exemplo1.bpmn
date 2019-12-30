@@ -13,7 +13,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0ko65gz" sourceRef="Task_08zkaab" targetRef="ExclusiveGateway_05t61pw" />
     <bpmn:sequenceFlow id="SequenceFlow_1hybf0f" sourceRef="ExclusiveGateway_05t61pw" targetRef="Task_0glp7bx" />
     <bpmn:sequenceFlow id="SequenceFlow_0gdb43n" sourceRef="ExclusiveGateway_05t61pw" targetRef="Task_1bpnpvz">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable1==1}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable1=='t3'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_062wuzu">
       <bpmn:incoming>SequenceFlow_12aedgw</bpmn:incoming>
@@ -23,15 +23,15 @@
       <bpmn:incoming>SequenceFlow_0sclxaf</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0sclxaf" sourceRef="Task_1bpnpvz" targetRef="EndEvent_1e3m3yc" />
-    <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:expression="">
+    <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:expression="${apiService1Task}">
       <bpmn:incoming>SequenceFlow_0o9l2l3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ko65gz</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2">
+    <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:expression="${apiService2Task}">
       <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_12aedgw</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3">
+    <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:expression="${apiService3Task}">
       <bpmn:incoming>SequenceFlow_0gdb43n</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0sclxaf</bpmn:outgoing>
     </bpmn:serviceTask>

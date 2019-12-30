@@ -15,8 +15,8 @@ camunda:
     webapp:
       index-redirect-enabled: true
     admin-user:
-      id: root
-      password: root
+      id: admin
+      password: admin
     application:
       delete-upon-undeploy: false
       scan-for-process-definitions: false
