@@ -1,10 +1,7 @@
 package br.com.itau.journey.controller;
 
-import java.math.BigDecimal;
-
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.variable.Variables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +24,6 @@ public class CreateJorneyControlle {
     }
 
     private ProcessInstance createProcess() {
-        return runtimeService.startProcessInstanceByKey("exemplo1",
-                Variables.putValue("valorVariable1","t1" ));
+        return runtimeService.startProcessInstanceByKey("exemplo1");
     }
 }
