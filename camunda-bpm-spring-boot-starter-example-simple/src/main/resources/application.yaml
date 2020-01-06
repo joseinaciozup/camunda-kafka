@@ -34,3 +34,15 @@ camunda:
 
 #camunda.bpm.auto-deployment-enabled: false
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+        errorDecoder: br.com.itau.journey.feign.decoder.IntegrationErrorDecoder
+  httpclient:
+    max-connections: 1000
+    max-connections-per-route: 500
+

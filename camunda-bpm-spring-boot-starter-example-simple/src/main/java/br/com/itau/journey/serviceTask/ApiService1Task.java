@@ -9,12 +9,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 
-
-
 @Component
 public class ApiService1Task implements JavaDelegate {
 
     //private ApiService1Feign apiService1Feign;
+
+    //@Autowired
+    //public ApiService1Task(ApiService1Feign apiService1Feign){
+    //    this.apiService1Feign = apiService1Feign;
+    //}
 
 
     @Override
