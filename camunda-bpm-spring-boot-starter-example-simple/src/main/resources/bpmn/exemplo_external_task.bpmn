@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
-  <bpmn:process id="exemplo1" name="exemplo1" isExecutable="true">
+  <bpmn:process id="exemplo_external_task" name="exemplo_external_task" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_0o9l2l3</bpmn:outgoing>
     </bpmn:startEvent>
@@ -31,7 +31,7 @@
       <bpmn:startEvent id="StartEvent_04az5kz">
         <bpmn:outgoing>SequenceFlow_0hads3e</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:delegateExpression="${apiService1Task}">
+      <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:type="external" camunda:topic="externalTaskApi1">
         <bpmn:incoming>SequenceFlow_0hads3e</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_05dpxxj</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -41,11 +41,11 @@
         <bpmn:outgoing>SequenceFlow_1hybf0f</bpmn:outgoing>
         <bpmn:outgoing>SequenceFlow_0gdb43n</bpmn:outgoing>
       </bpmn:exclusiveGateway>
-      <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:delegateExpression="${apiService2Task}">
+      <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:type="external" camunda:topic="externalTaskApi2">
         <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_07zelf7</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:delegateExpression="${apiService3Task}">
+      <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:type="external" camunda:topic="externalTaskApi3">
         <bpmn:incoming>SequenceFlow_0gdb43n</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0mzaqrq</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -93,7 +93,7 @@
       <bpmn:incoming>SequenceFlow_1u7nnlq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k3cyqk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:delegateExpression="${apiService1Task}">
+    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="externalTaskApi1">
       <bpmn:incoming>SequenceFlow_0k3cyqk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0xxgeau</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -103,11 +103,11 @@
       <bpmn:outgoing>SequenceFlow_0h7b0qg</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_159oqbq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:delegateExpression="${apiService2Task}">
+    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="externalTaskApi2">
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0sv96b5</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:delegateExpression="${apiService3Task}">
+    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="externalTaskApi3">
       <bpmn:incoming>SequenceFlow_159oqbq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0cvtmjj</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -136,7 +136,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_10h1928" sourceRef="finaliza_termo" targetRef="EndEvent_00efduz" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="exemplo1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="exemplo_external_task">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="202" width="36" height="36" />
       </bpmndi:BPMNShape>
