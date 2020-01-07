@@ -35,18 +35,43 @@ public class CreateJorneyControlle {
         return processInstance.getProcessInstanceId();
     }
 
-    @PostMapping("/{processInstanceId}/complete")
-    public void createCompleteTask(@PathVariable(value = "processInstanceId") String processInstanceId){
+    @PostMapping("selecionaloja/{processInstanceId}/complete")
+    public void selecionaLoja(@PathVariable(value = "processInstanceId") String processInstanceId){
+
+        Map<String,Object> formParams = new HashMap<>();
+        formParams.put("name_loja","Extra");
+
+        compleUserTask(processInstanceId, formParams);
+    }
+
+    @PostMapping("selecionadados/{processInstanceId}/complete")
+    public void selecionaDados(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
         formParams.put("name","teste - nome");
         formParams.put("sobrenome","teste - sobrenome");
 
-        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
-        processEngine.getFormService().submitTaskForm(task.getId(),formParams );
+        compleUserTask(processInstanceId, formParams);
     }
 
-    private ProcessInstance createProcess() {
-        return runtimeService.startProcessInstanceByKey("exemplo1");
+    @PostMapping("selecionaoferta/{processInstanceId}/complete")
+    public void selecionaOferta(@PathVariable(value = "processInstanceId") String processInstanceId){
+
+        Map<String,Object> formParams = new HashMap<>();
+        formParams.put("ofeta_id","cartao-de-credito");
+        compleUserTask(processInstanceId, formParams);
+    }
+
+    @PostMapping("finalizatermo/{processInstanceId}/complete")
+    public void finalizaTermo(@PathVariable(value = "processInstanceId") String processInstanceId){
+
+        Map<String,Object> formParams = new HashMap<>();
+        formParams.put("finaliza_id","finalizado oferta");
+        compleUserTask(processInstanceId, formParams);
+    }
+
+    private void compleUserTask( String processInstanceId, Map<String, Object> formParams) {
+        Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).singleResult();
+        processEngine.getFormService().submitTaskForm(task.getId(), formParams);
     }
 }
