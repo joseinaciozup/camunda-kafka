@@ -17,6 +17,8 @@
   <modules>  
     <module>spring-kafka</module>
     <module>camunda-bpm-spring-boot-starter-example-simple</module>
+    <module>worker-controller</module>
+    <module>worker-polling</module>
   </modules>
 
   <dependencies>

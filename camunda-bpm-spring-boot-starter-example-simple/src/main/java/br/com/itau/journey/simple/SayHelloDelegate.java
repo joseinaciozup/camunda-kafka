@@ -16,6 +16,7 @@
  */
 package br.com.itau.journey.simple;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
@@ -30,13 +31,14 @@ public class SayHelloDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     logger.info("executed sayHelloDelegate: {}", execution);
-    //throw new BpmnError("FuiNoTororo2");
-    String id = execution.getProcessInstanceId();
-    execution.createIncident("executeInternal", "ProcessVariableDoesNotExist", "Exceção genérica");
-    /*Context.getCommandContext().getTransactionContext().addTransactionListener(TransactionState.COMMITTED, commandContext -> {
+    throw new BpmnError("FuiNoTororo2");
+//    String id = execution.getProcessInstanceId();
+//    execution.createIncident("executeInternal", "ProcessVariableDoesNotExist", "Exceção genérica");
+    /*
+    Context.getCommandContext().getTransactionContext().addTransactionListener(TransactionState.COMMITTED, commandContext -> {
       execution.getProcessEngine().getRuntimeService().suspendProcessInstanceById(id);
-    });*/
-
+    });
+    */
     //Thread.sleep(5000);
   }
 

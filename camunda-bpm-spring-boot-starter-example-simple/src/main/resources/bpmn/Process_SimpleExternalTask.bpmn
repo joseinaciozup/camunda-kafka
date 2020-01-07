@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_07dzyy1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <bpmn:process id="Process_SimpleExternalTask" name="Process_SimpleExternalTask" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0y0f9mi</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_083xjoq">
+      <bpmn:incoming>SequenceFlow_1q2jdbt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:eventBasedGateway id="ExclusiveGateway_0e6ifgi">
+      <bpmn:incoming>SequenceFlow_1y9bvcy</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1thghs4</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_14xwxzf">
+      <bpmn:incoming>SequenceFlow_0y0f9mi</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1y9bvcy</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0h1dvn0" camunda:expression="workerPolling" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0xp9lf5">
+      <bpmn:incoming>SequenceFlow_1thghs4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1q2jdbt</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_13kt4ag" messageRef="Message_15z3pwh" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0y0f9mi" sourceRef="StartEvent_1" targetRef="IntermediateThrowEvent_14xwxzf" />
+    <bpmn:sequenceFlow id="SequenceFlow_1y9bvcy" sourceRef="IntermediateThrowEvent_14xwxzf" targetRef="ExclusiveGateway_0e6ifgi" />
+    <bpmn:sequenceFlow id="SequenceFlow_1thghs4" sourceRef="ExclusiveGateway_0e6ifgi" targetRef="IntermediateThrowEvent_0xp9lf5" />
+    <bpmn:sequenceFlow id="SequenceFlow_1q2jdbt" sourceRef="IntermediateThrowEvent_0xp9lf5" targetRef="EndEvent_083xjoq" />
+  </bpmn:process>
+  <bpmn:signal id="Signal_00fnj6n" name="testedesinal" />
+  <bpmn:message id="Message_15z3pwh" name="completePolling" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_SimpleExternalTask">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_083xjoq_di" bpmnElement="EndEvent_083xjoq">
+        <dc:Bounds x="532" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EventBasedGateway_1gnzlik_di" bpmnElement="ExclusiveGateway_0e6ifgi">
+        <dc:Bounds x="345" y="95" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0djomwn_di" bpmnElement="IntermediateThrowEvent_14xwxzf">
+        <dc:Bounds x="252" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0ym3dp2_di" bpmnElement="IntermediateThrowEvent_0xp9lf5">
+        <dc:Bounds x="452" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0y0f9mi_di" bpmnElement="SequenceFlow_0y0f9mi">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="252" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1y9bvcy_di" bpmnElement="SequenceFlow_1y9bvcy">
+        <di:waypoint x="288" y="120" />
+        <di:waypoint x="345" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1thghs4_di" bpmnElement="SequenceFlow_1thghs4">
+        <di:waypoint x="395" y="120" />
+        <di:waypoint x="452" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1q2jdbt_di" bpmnElement="SequenceFlow_1q2jdbt">
+        <di:waypoint x="488" y="120" />
+        <di:waypoint x="532" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -11,7 +11,7 @@ services:
     ports:
     - 5432:5432
     volumes:
-      - /home/zup/Projects/dockers-compose/PostgreSQLJourney:/var/lib/postgresql/data
+      - /Users/internalit/Documents/projects/repo-erik/camunda-kafka/dockers-compose/PostgreSQLJourney:/var/lib/postgresql/data
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -21,7 +21,7 @@ services:
     ports:
     - "16543:80"
     volumes:
-      - /home/zup/Projects/dockers-compose/pgadmin:/var/lib/pgadmin
+      - /Users/internalit/Documents/projects/repo-erik/camunda-kafka/dockers-compose/pgadmin:/var/lib/pgadmin
     depends_on:
     - simple-journey
 

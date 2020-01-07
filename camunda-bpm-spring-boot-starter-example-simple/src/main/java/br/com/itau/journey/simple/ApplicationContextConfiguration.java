@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.engine.ExternalTaskService;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.impl.bpmn.behavior.ExternalTaskActivityBehavior;
@@ -56,6 +57,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +103,18 @@ public class ApplicationContextConfiguration {
     private ProcessEngineFactoryBean processEngineFactoryBean;
     @Autowired
     private ExternalTaskService externalTaskService;
+    @Autowired
+    private TaskService taskService;
     //hikariDataSource.close()
     @Autowired
     private HikariDataSource hikariDataSource;
     @Value("${org.camunda.bpm.spring.boot.starter.example.simple.SimpleApplication.exitWhenFinished:false}")
     private boolean exitWhenFinished;
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Bean
     public ProcessEnginePlugin externalTaskEventPlugin() {
