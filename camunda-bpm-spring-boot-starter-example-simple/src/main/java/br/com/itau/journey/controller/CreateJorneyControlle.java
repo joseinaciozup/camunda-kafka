@@ -1,8 +1,6 @@
 package br.com.itau.journey.controller;
 
-import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,15 +16,10 @@ public class CreateJorneyControlle {
 
     private final RuntimeService runtimeService;
 
-    private final ProcessEngine processEngine;
-
-    private final TaskService taskService;
-
-
     @PostMapping
     public String createJorney(){
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("exemplo1");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("exemplo_delegate");
         return processInstance.getProcessInstanceId();
     }
 
