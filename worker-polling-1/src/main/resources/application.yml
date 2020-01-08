@@ -1,0 +1,4 @@
+server:
+  port: 8089
+camunda:
+  endpoint: localhost:8080/rest

@@ -10,8 +10,8 @@ services:
     command: ["-c", "shared_buffers=256MB", "-c", "max_connections=500"]
     ports:
     - 5432:5432
-#    volumes:
-#      - /Users/wesly.borges/Documents/projetos/eco-itau/camunda-kafka/dbPostgreSQLJourney:/var/lib/postgresql/data
+    volumes:
+      - ../:/var/lib/mysql/data
 
   pgadmin-compose:
     image: dpage/pgadmin4
@@ -21,7 +21,7 @@ services:
     ports:
     - "16543:80"
     volumes:
-      - /Users/wesly.borges/Documents/projetos/eco-itau/camunda-kafka/pgAdmin4:/var/lib/pgadmin
+      - ../:/var/lib/pgadmin
     depends_on:
     - simple-journey
 
