@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.itau</groupId>
-	<artifactId>apiservice2</artifactId>
+	<artifactId>apiservice-controller2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>apiservice2</name>
+	<name>apiservice-controller2</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
