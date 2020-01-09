@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.itau</groupId>
-	<artifactId>worker-polling-1</artifactId>
+	<artifactId>worker-polling-3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>worker-polling-1</name>
+	<name>worker-polling-3</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

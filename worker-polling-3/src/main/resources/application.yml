@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8083
 camunda:
   endpoint: localhost:8080/rest
-  worker-topic: Worker-Polling-1
+  worker-topic: Worker-Polling-3

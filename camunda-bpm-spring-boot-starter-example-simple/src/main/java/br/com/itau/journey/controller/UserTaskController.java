@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("usertask")
+@RequestMapping("userTask")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserTaskController {
 
@@ -23,7 +23,7 @@ public class UserTaskController {
 
     private final FormService formService;
 
-    @PostMapping("selecionaloja/{processInstanceId}/complete")
+    @PostMapping("selecionaLoja/{processInstanceId}/complete")
     public void selecionaLoja(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
@@ -32,7 +32,7 @@ public class UserTaskController {
         compleUserTask(processInstanceId, formParams);
     }
 
-    @PostMapping("selecionadados/{processInstanceId}/complete")
+    @PostMapping("selecionaDados/{processInstanceId}/complete")
     public void selecionaDados(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
@@ -42,7 +42,7 @@ public class UserTaskController {
         compleUserTask(processInstanceId, formParams);
     }
 
-    @PostMapping("selecionaoferta/{processInstanceId}/complete")
+    @PostMapping("selecionaOferta/{processInstanceId}/complete")
     public void selecionaOferta(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
@@ -50,7 +50,7 @@ public class UserTaskController {
         compleUserTask(processInstanceId, formParams);
     }
 
-    @PostMapping("finalizatermo/{processInstanceId}/complete")
+    @PostMapping("finalizaTermo/{processInstanceId}/complete")
     public void finalizaTermo(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();

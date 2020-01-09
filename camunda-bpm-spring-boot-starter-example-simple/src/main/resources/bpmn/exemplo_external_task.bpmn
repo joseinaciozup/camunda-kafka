@@ -31,21 +31,17 @@
       <bpmn:startEvent id="StartEvent_04az5kz">
         <bpmn:outgoing>SequenceFlow_0hads3e</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:type="external" camunda:topic="worker-polling-1">
-        <bpmn:incoming>SequenceFlow_0hads3e</bpmn:incoming>
-        <bpmn:outgoing>SequenceFlow_05dpxxj</bpmn:outgoing>
-      </bpmn:serviceTask>
       <bpmn:sequenceFlow id="SequenceFlow_0hads3e" sourceRef="StartEvent_04az5kz" targetRef="Task_08zkaab" />
       <bpmn:exclusiveGateway id="ExclusiveGateway_05t61pw" default="SequenceFlow_1hybf0f">
         <bpmn:incoming>SequenceFlow_0zh4co1</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_1hybf0f</bpmn:outgoing>
         <bpmn:outgoing>SequenceFlow_0gdb43n</bpmn:outgoing>
       </bpmn:exclusiveGateway>
-      <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:type="external" camunda:topic="externalTaskApi2">
+      <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
         <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_07zelf7</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:type="external" camunda:topic="externalTaskApi3">
+      <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
         <bpmn:incoming>SequenceFlow_0gdb43n</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0mzaqrq</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -81,6 +77,10 @@
       <bpmn:sequenceFlow id="SequenceFlow_1dzkt2o" sourceRef="ExclusiveGateway_1vyg0uy" targetRef="IntermediateCatchEvent_09s4knh" />
       <bpmn:sequenceFlow id="SequenceFlow_17qdcky" sourceRef="IntermediateCatchEvent_09s4knh" targetRef="EndEvent_1wgpi4f" />
       <bpmn:sequenceFlow id="SequenceFlow_05dpxxj" sourceRef="Task_08zkaab" targetRef="IntermediateCatchEvent_04coy13" />
+      <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
+        <bpmn:incoming>SequenceFlow_0hads3e</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_05dpxxj</bpmn:outgoing>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="SequenceFlow_137ssq5" sourceRef="selecine_dados" targetRef="SubProcess_0ksymd2" />
     <bpmn:sequenceFlow id="SequenceFlow_1u7nnlq" sourceRef="SubProcess_0ksymd2" targetRef="selecione_oferta" />
@@ -93,7 +93,7 @@
       <bpmn:incoming>SequenceFlow_1u7nnlq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k3cyqk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="externalTaskApi1">
+    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
       <bpmn:incoming>SequenceFlow_0k3cyqk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0xxgeau</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -103,17 +103,17 @@
       <bpmn:outgoing>SequenceFlow_0h7b0qg</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_159oqbq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="externalTaskApi2">
+    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0sv96b5</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="externalTaskApi3">
+    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
       <bpmn:incoming>SequenceFlow_159oqbq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0cvtmjj</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0h7b0qg" sourceRef="ExclusiveGateway_10y47ls" targetRef="ServiceTask_08cu32i" />
     <bpmn:sequenceFlow id="SequenceFlow_159oqbq" sourceRef="ExclusiveGateway_10y47ls" targetRef="ServiceTask_0fo1ch6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable==2}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable==6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0xxgeau" sourceRef="ServiceTask_1f6jrso" targetRef="ExclusiveGateway_10y47ls" />
     <bpmn:endEvent id="EndEvent_13k2unm">
@@ -157,9 +157,6 @@
         <di:waypoint x="910" y="303" />
         <di:waypoint x="970" y="303" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0i8sb3o_di" bpmnElement="Task_08zkaab">
-        <dc:Bounds x="680" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_06t3681_di" bpmnElement="Task_0glp7bx">
         <dc:Bounds x="970" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -292,6 +289,9 @@
         <di:waypoint x="2150" y="328" />
         <di:waypoint x="2222" y="328" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0i8sb3o_di" bpmnElement="Task_08zkaab">
+        <dc:Bounds x="680" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
