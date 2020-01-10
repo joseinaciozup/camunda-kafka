@@ -23,6 +23,9 @@ public class WorkerStarter {
     @Value("${camunda.worker-topic}")
     private String WORKER_POLLING;
 
+    @Value("${camunda.worker-id}")
+    private String WORKER_ID;
+
     @Autowired
     private ConsumerService consumerService;
 
@@ -38,7 +41,7 @@ public class WorkerStarter {
     }
 
     private List<FetchAndLockResponse> findPendentTasks() {
-        return consumerService.getTasksByTopic(WORKER_POLLING);
+        return consumerService.getTasksByTopic(WORKER_POLLING, WORKER_ID);
     }
 
     private String executionTask(FetchAndLockResponse fetchAndLockResponse) {

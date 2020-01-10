@@ -23,6 +23,7 @@
     <module>worker-polling-1</module>
     <module>worker-polling-2</module>
     <module>worker-polling-3</module>
+    <module>camunda-rest-services</module>
   </modules>
 
   <dependencies>

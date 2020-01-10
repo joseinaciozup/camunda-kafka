@@ -1,10 +1,7 @@
 package br.itau.journey.feign;
 
 import br.itau.journey.feign.dto.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +14,6 @@ import java.util.Map;
 @Slf4j
 public class ConsumerService {
 
-    public static final String TEST_EXTERNAL_WORKER_ID = "testExternalWorkerId";
     private CamundaExternalTaskApi camundaExternalTaskApi;
 
     @Autowired
@@ -25,10 +21,10 @@ public class ConsumerService {
         this.camundaExternalTaskApi = camundaExternalTaskApi;
     }
 
-    public List<FetchAndLockResponse> getTasksByTopic(String camundaTopic) {
+    public List<FetchAndLockResponse> getTasksByTopic(String camundaTopic, String workerId) {
         log.info("GETING TASK BY TOPIC [{}]", camundaTopic);
         List<FetchAndLockResponse> fetchAndLockResponses = camundaExternalTaskApi.fetchAndLock(FetchAndLockRequest.builder()
-                .workerId(TEST_EXTERNAL_WORKER_ID)
+                .workerId(workerId)
                 .maxTasks(1)
                 .usePriority(true)
                 .topics(Arrays.asList(TopicRequest.builder()
@@ -40,16 +36,15 @@ public class ConsumerService {
         return fetchAndLockResponses;
     }
 
-    public boolean completeTask(FetchAndLockResponse fetchAndLockResponse, String step) {
-        log.info("COMPLETING [{}] of [{}] EXTERNAL TASK", step, fetchAndLockResponse.getId());
+    public void completeTask(FetchAndLockResponse fetchAndLockResponse, String workerId) {
+        log.info("COMPLETING [{}] EXTERNAL TASK", fetchAndLockResponse.getId());
         camundaExternalTaskApi.complete(fetchAndLockResponse.getId(), CompleteTaskRequest.builder()
-                .workerId(TEST_EXTERNAL_WORKER_ID)
+                .workerId(workerId)
                 .variables(getVariables(fetchAndLockResponse.getVariables()))
                 .build());
-        return true;
     }
 
-    public boolean handlerFailure(FetchAndLockResponse fetchAndLockResponse, String error) {
+    public void handlerFailure(FetchAndLockResponse fetchAndLockResponse, String error) {
         log.info("SEND FAILURE [{}] ", fetchAndLockResponse.getWorkerId());
         camundaExternalTaskApi.handlerFailure(fetchAndLockResponse.getId(),
                 FailureRequest.builder()
@@ -58,7 +53,6 @@ public class ConsumerService {
                 .retries(0L)
                 .retryTimeout(60000L)
                 .build());
-        return true;
     }
 
     private Map<String, CompleteTaskRequest.Value> getVariables(Map mapVariable) {
