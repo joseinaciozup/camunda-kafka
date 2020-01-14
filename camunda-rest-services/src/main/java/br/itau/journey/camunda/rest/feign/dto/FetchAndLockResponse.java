@@ -32,7 +32,7 @@ public class FetchAndLockResponse {
     private String workerId;
     private String topicName;
     private String tenantId;
-    private Map variables;
+    private Map<String, Object> variables;
     private Integer priority;
     private String businessKey;
 
