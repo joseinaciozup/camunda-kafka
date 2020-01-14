@@ -1,11 +1,10 @@
-package br.itau.journey.feign.dto;
+package br.itau.journey.camunda.rest.feign.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @AllArgsConstructor

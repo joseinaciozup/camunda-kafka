@@ -1,7 +1,7 @@
 package br.itau.journey.worker;
 
-import br.itau.journey.feign.ConsumerService;
-import br.itau.journey.feign.dto.FetchAndLockResponse;
+import br.itau.journey.camunda.rest.feign.ConsumerService;
+import br.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class WorkerStarter {
     private ConsumerService consumerService;
 
 
-    @Scheduled(fixedDelay = 30000)
+    @Scheduled(fixedDelay = 5000)
     public void start() {
         LOGGER.info("Starting...");
 
@@ -45,24 +45,31 @@ public class WorkerStarter {
     }
 
     private String executionTask(FetchAndLockResponse fetchAndLockResponse) {
-        Integer valorExecution = new Random().nextInt(3);
-        if (valorExecution > 0) {
+        Integer valorExecution = new Random().nextInt(6);
+//        if (valorExecution > 0) {
+        if (true) {
             try {
                 Thread.sleep((valorExecution * 1000));
                 Map<String, Integer> variables = new HashMap<>();
                 variables.put("valorVariable", valorExecution);
                 fetchAndLockResponse.setVariables(variables);
 
-                consumerService.completeTask(fetchAndLockResponse, "Worker Polling 1");
+                consumerService.completeTask(fetchAndLockResponse, WORKER_ID);
             } catch (InterruptedException e) {
+                handlerFailure(fetchAndLockResponse);
                 e.printStackTrace();
             }
-            return "Executando a API service 3";
+            return "Executando a API [{" + WORKER_ID + "}]";
         } else {
-            LOGGER.info("Ocorreu um erro na execução do serviço API service 3");
-            consumerService.handlerFailure(fetchAndLockResponse, "Ocorreu um erro na execução do serviço API service 3");
+            handlerFailure(fetchAndLockResponse);
             return StringUtils.EMPTY;
         }
+    }
+
+    private void handlerFailure(FetchAndLockResponse fetchAndLockResponse) {
+        String message = "Ocorreu um erro na execução do serviço - [{" + WORKER_POLLING + "}]";
+        LOGGER.info(message);
+        consumerService.handlerFailure(fetchAndLockResponse, message);
     }
 
 }

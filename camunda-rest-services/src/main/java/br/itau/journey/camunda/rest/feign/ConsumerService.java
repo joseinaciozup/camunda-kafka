@@ -1,6 +1,6 @@
-package br.itau.journey.feign;
+package br.itau.journey.camunda.rest.feign;
 
-import br.itau.journey.feign.dto.*;
+import br.itau.journey.camunda.rest.feign.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

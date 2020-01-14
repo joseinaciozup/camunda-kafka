@@ -3,7 +3,4 @@ server:
 camunda:
   endpoint: localhost:8080/rest
   worker-topic: Worker-Polling-2
-
-spring:
-  main:
-    allow-bean-definition-overriding: true
+  worker-id: Worker-Polling-2

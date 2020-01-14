@@ -1,4 +1,4 @@
 server:
-  port: 8081
+  port: 8099
 camunda:
   endpoint: localhost:8080/rest

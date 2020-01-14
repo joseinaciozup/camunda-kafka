@@ -1,4 +1,4 @@
-package br.itau.journey.feign.dto;
+package br.itau.journey.camunda.rest.feign.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

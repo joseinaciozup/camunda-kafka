@@ -1,9 +1,9 @@
-package br.itau.journey.feign;
+package br.itau.journey.camunda.rest.feign;
 
-import br.itau.journey.feign.dto.CompleteTaskRequest;
-import br.itau.journey.feign.dto.FailureRequest;
-import br.itau.journey.feign.dto.FetchAndLockRequest;
-import br.itau.journey.feign.dto.FetchAndLockResponse;
+import br.itau.journey.camunda.rest.feign.dto.CompleteTaskRequest;
+import br.itau.journey.camunda.rest.feign.dto.FailureRequest;
+import br.itau.journey.camunda.rest.feign.dto.FetchAndLockRequest;
+import br.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
