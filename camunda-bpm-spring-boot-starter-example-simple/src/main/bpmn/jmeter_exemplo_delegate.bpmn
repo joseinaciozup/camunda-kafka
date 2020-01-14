@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
   <bpmn:process id="jmeter_exemplo_delegate" name="jmeter_exemplo_delegate" isExecutable="true">
     <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api Controller1" camunda:delegateExpression="${apiService1Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_06ognma</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0xxgeau</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -11,10 +16,20 @@
       <bpmn:outgoing>SequenceFlow_159oqbq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api Controller2" camunda:delegateExpression="${apiService2Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zq6jg6</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_159oqbq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bwmq3k</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -27,6 +42,11 @@
       <bpmn:incoming>SequenceFlow_0e6qj6v</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:serviceTask id="ServiceTask_0qfgb74" name="Api&#10; Controller1&#10;" camunda:delegateExpression="${apiService1Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0jx3ks5</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1sb3er1</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -41,10 +61,20 @@
       <bpmn:outgoing>SequenceFlow_06ognma</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:serviceTask id="ServiceTask_0nb13pb" name="Api&#10; Controller2&#10;" camunda:delegateExpression="${apiService2Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1uucxfv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1x0qhfb</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="ServiceTask_0ot849i" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0mc92ri</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0z0sen3</bpmn:outgoing>
     </bpmn:serviceTask>
