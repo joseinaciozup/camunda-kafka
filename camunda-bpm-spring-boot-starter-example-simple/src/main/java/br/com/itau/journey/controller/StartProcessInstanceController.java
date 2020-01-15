@@ -25,12 +25,15 @@ public class StartProcessInstanceController {
     private final ProcessEngine processEngine;
 
     private Map<String, String> variables = new HashMap<>();
+    private String EXTERNAL_TASK = "jmeter_external_task";
 
     @PostMapping
     public String start(@RequestBody RequestStartDTO requestStart) throws InterruptedException {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(requestStart.getBpmnInstance(), getVariables(requestStart.getVariables()));
 
-        waitingProcessEnd(processInstance);
+        if (EXTERNAL_TASK.equals(requestStart.getBpmnInstance())) {
+           waitingProcessEnd(processInstance);
+        }
 
         return processInstance.getProcessInstanceId();
     }

@@ -4,3 +4,6 @@ camunda:
   endpoint: localhost:8080/rest
   worker-topic: Worker-Polling-2
   worker-id: Worker-Polling-2
+  worker-schedule: 5000
+  worker-thread: 10
+  worker-max-queue-size: 5

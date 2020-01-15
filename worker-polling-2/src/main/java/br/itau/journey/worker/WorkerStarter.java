@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,8 @@ public class WorkerStarter {
     @Autowired
     private ConsumerService consumerService;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelayString = "${camunda.worker-schedule}")
+    @Async("workerPollingAsync")
     public void start() {
         LOGGER.info("Starting...");
 
