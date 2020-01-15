@@ -17,9 +17,9 @@
   <modules>  
     <module>spring-kafka</module>
     <module>camunda-bpm-spring-boot-starter-example-simple</module>
-    <module>apiservice - controller1</module>
-    <module>apiservice - controller2</module>
-    <module>apiservice - controller3</module>
+    <module>worker-controller-1</module>
+    <module>worker-controller-2</module>
+    <module>worker-controller-3</module>
     <module>worker-polling-1</module>
     <module>worker-polling-2</module>
     <module>worker-polling-3</module>
