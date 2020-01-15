@@ -1,7 +1,6 @@
 package br.com.itau.journey.controller;
 
 import br.com.itau.journey.dto.RequestStartDTO;
-import br.com.itau.journey.dto.ValueVariableDTO;
 import br.com.itau.journey.dto.VariablesStartDTO;
 import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -28,21 +27,24 @@ public class StartProcessInstanceController {
     private Map<String, String> variables = new HashMap<>();
 
     @PostMapping
-    public String start(@RequestBody RequestStartDTO requestStart){
+    public String start(@RequestBody RequestStartDTO requestStart) throws InterruptedException {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(requestStart.getBpmnInstance(), getVariables(requestStart.getVariables()));
 
-        while (getInstanceProcess(processInstance)) {}
+        waitingProcessEnd(processInstance);
 
         return processInstance.getProcessInstanceId();
     }
 
-    private boolean getInstanceProcess(ProcessInstance processInstance) {
-        return processEngine
-                .getRuntimeService()
-                .createProcessInstanceQuery()
-                .processInstanceId(processInstance.getId())
-                .singleResult() != null;
-
+    private void waitingProcessEnd(ProcessInstance processInstance) throws InterruptedException {
+        boolean x = true;
+        while (x) {
+            Thread.sleep(5000);
+            x = processEngine
+                    .getRuntimeService()
+                    .createProcessInstanceQuery()
+                    .processInstanceId(processInstance.getId())
+                    .singleResult() != null;
+        }
     }
 
     private Map<String, Object> getVariables(VariablesStartDTO variablesStartDTO) {

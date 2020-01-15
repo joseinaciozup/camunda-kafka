@@ -1,15 +1,23 @@
 spring.application.name: simpleApplication
 spring:
   datasource:
+    hikari:
+      minIdle: 100
+      idle-timeout: 300000
+      maximumPoolSize: 300
+      connectionTimeout: 300000
+      leakDetectionThreshold: 300000
     url: jdbc:postgresql://localhost:5432/journey
     username: uaiso
     password: 123456
     driver-class-name: org.postgresql.Driver
+
   jpa:
     properties:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+
 camunda:
   bpm:
     webapp:
@@ -45,4 +53,3 @@ feign:
   httpclient:
     max-connections: 1000
     max-connections-per-route: 500
-

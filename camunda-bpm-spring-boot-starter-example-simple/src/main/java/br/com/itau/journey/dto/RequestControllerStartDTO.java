@@ -1,0 +1,16 @@
+package br.com.itau.journey.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RequestControllerStartDTO {
+
+    private String time;
+    private String direction;
+}
