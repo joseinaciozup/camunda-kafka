@@ -1,14 +1,12 @@
 package br.itau.journey.worker;
 
 import br.itau.journey.camunda.rest.feign.ConsumerService;
-import br.itau.journey.camunda.rest.feign.dto.CompleteTaskRequest;
 import br.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
 import br.itau.journey.constant.CamundaConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -18,12 +16,11 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Component
+@Slf4j
 public class WorkerStarter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkerStarter.class);
     private String ZERO = "0";
 
     @Value("${camunda.worker-topic}")
@@ -32,13 +29,15 @@ public class WorkerStarter {
     @Value("${camunda.worker-id}")
     private String WORKER_ID;
 
+    private String TIME = CamundaConstants.TIME3.getDescricao();
+
     @Autowired
     private ConsumerService consumerService;
 
     @Scheduled(fixedDelayString = "${camunda.worker-schedule}")
     @Async("workerPollingAsync")
     public void start() {
-        LOGGER.info("Starting...");
+        log.info("[{}}] - Starting...", WORKER_POLLING);
 
         List<FetchAndLockResponse> tasks = findPendentTasks();
         tasks.stream().forEach(t -> {
@@ -48,8 +47,7 @@ public class WorkerStarter {
                 e.printStackTrace();
             }
         });
-
-        LOGGER.info("End...");
+        log.info("[{}}] - End...", WORKER_POLLING);
     }
 
     private List<FetchAndLockResponse> findPendentTasks() {
@@ -57,10 +55,11 @@ public class WorkerStarter {
     }
 
     private String executionTask(FetchAndLockResponse fetchAndLockResponse) throws JSONException {
+        log.info("[{}}] - Execution Task Starting...", WORKER_POLLING);
         if (!isIncident(fetchAndLockResponse.getVariables())) {
             try {
                 HashMap<String, Object> variables = new HashMap<>();
-                final String time = getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.TIME3.getDescricao());
+                final String time = getVariable(fetchAndLockResponse.getVariables(), TIME);
                 final String step = getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.STEP.getDescricao());
 
                 final String direction = getDirection(fetchAndLockResponse, step);
@@ -75,6 +74,7 @@ public class WorkerStarter {
                 handlerFailure(fetchAndLockResponse);
                 e.printStackTrace();
             }
+            log.info("[{}}] - Execution Task End...", WORKER_POLLING);
             return "Executando a API [{" + WORKER_ID + "}]";
         } else {
             handlerFailure(fetchAndLockResponse);
@@ -84,7 +84,7 @@ public class WorkerStarter {
 
     private String getDirection(FetchAndLockResponse fetchAndLockResponse, String step) throws JSONException {
         return "A".equals(step) ? getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_A.getDescricao()):
-                                  getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_B.getDescricao());
+                getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_B.getDescricao());
     }
 
     private String getVariable(Map<String, Object> variables, String field) throws JSONException {
@@ -99,13 +99,15 @@ public class WorkerStarter {
     }
 
     private boolean isIncident(Map variables) throws JSONException {
-        return getVariable(variables, CamundaConstants.TIME1.getDescricao()).equals(ZERO);
+        return getVariable(variables, TIME).equals(ZERO);
     }
 
     private void handlerFailure(FetchAndLockResponse fetchAndLockResponse) {
+        log.info("[{}}] - Execution Handler Failure - Starting...", WORKER_POLLING);
         String message = "Ocorreu um erro na execução do serviço - [{" + WORKER_POLLING + "}]";
-        LOGGER.info(message);
+        log.info(message);
         consumerService.handlerFailure(fetchAndLockResponse, message);
+        log.info("[{}}] - Execution Handler Failure - End...", WORKER_POLLING);
     }
 
 }

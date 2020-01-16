@@ -1,2 +1,4 @@
 server:
   port: 8088
+camunda:
+  worker-name: Worker-Controller-2
