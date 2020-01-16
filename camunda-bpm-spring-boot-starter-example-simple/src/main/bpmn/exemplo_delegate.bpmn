@@ -31,7 +31,7 @@
       <bpmn:startEvent id="StartEvent_04az5kz">
         <bpmn:outgoing>SequenceFlow_0hads3e</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:serviceTask id="Task_08zkaab" name="Api&#10; Controller1&#10;" camunda:delegateExpression="${apiService1Task}">
+      <bpmn:serviceTask id="Task_08zkaab" name="Api&#10; Controller1&#10;" camunda:delegateExpression="${serviceTaskWorkerController1}">
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="Valor">A</camunda:inputParameter>
@@ -46,7 +46,7 @@
         <bpmn:outgoing>SequenceFlow_1hybf0f</bpmn:outgoing>
         <bpmn:outgoing>SequenceFlow_0gdb43n</bpmn:outgoing>
       </bpmn:exclusiveGateway>
-      <bpmn:serviceTask id="Task_0glp7bx" name="Api&#10; Controller2&#10;" camunda:delegateExpression="${apiService2Task}">
+      <bpmn:serviceTask id="Task_0glp7bx" name="Api&#10; Controller2&#10;" camunda:delegateExpression="${serviceTaskWorkerController2}">
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="Valor">A</camunda:inputParameter>
@@ -55,7 +55,7 @@
         <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_07zelf7</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:serviceTask id="Task_1bpnpvz" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
+      <bpmn:serviceTask id="Task_1bpnpvz" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${serviceTaskWorkerController3}">
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="Valor">A</camunda:inputParameter>
@@ -74,7 +74,7 @@
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="SequenceFlow_1hybf0f" sourceRef="ExclusiveGateway_05t61pw" targetRef="Task_0glp7bx" />
       <bpmn:sequenceFlow id="SequenceFlow_0gdb43n" sourceRef="ExclusiveGateway_05t61pw" targetRef="Task_1bpnpvz">
-        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable==2}</bpmn:conditionExpression>
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${directionA==2}</bpmn:conditionExpression>
       </bpmn:sequenceFlow>
       <bpmn:sequenceFlow id="SequenceFlow_07zelf7" sourceRef="Task_0glp7bx" targetRef="ExclusiveGateway_1vyg0uy" />
       <bpmn:sequenceFlow id="SequenceFlow_0mzaqrq" sourceRef="Task_1bpnpvz" targetRef="ExclusiveGateway_1vyg0uy" />
@@ -92,7 +92,7 @@
       <bpmn:incoming>SequenceFlow_1u7nnlq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k3cyqk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api Controller1" camunda:delegateExpression="${apiService1Task}">
+    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api Controller1" camunda:delegateExpression="${serviceTaskWorkerController1}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="Valor">B</camunda:inputParameter>
@@ -107,7 +107,7 @@
       <bpmn:outgoing>SequenceFlow_0h7b0qg</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_159oqbq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api Controller2" camunda:delegateExpression="${apiService2Task}">
+    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api Controller2" camunda:delegateExpression="${serviceTaskWorkerController2}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="Valor">B</camunda:inputParameter>
@@ -116,7 +116,7 @@
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_01laoxa</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
+    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${serviceTaskWorkerController3}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="Valor">B</camunda:inputParameter>
@@ -127,7 +127,7 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0h7b0qg" sourceRef="ExclusiveGateway_10y47ls" targetRef="ServiceTask_08cu32i" />
     <bpmn:sequenceFlow id="SequenceFlow_159oqbq" sourceRef="ExclusiveGateway_10y47ls" targetRef="ServiceTask_0fo1ch6">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valorVariable==2}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${directionB==2}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0xxgeau" sourceRef="ServiceTask_1f6jrso" targetRef="ExclusiveGateway_10y47ls" />
     <bpmn:userTask id="finaliza_termo" name="finaliza_termo" camunda:formKey="finaliza_termo">
