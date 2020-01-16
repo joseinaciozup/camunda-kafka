@@ -208,7 +208,7 @@
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.value">{&#xd;
-    &quot;bpmnInstance&quot;: &quot;jmeter_exemplo_delegate&quot;,&#xd;
+    &quot;bpmnInstance&quot;: &quot;jmeter_java_delegate&quot;,&#xd;
     &quot;variables&quot;: {&#xd;
         &quot;timeService1&quot;: &quot;1000&quot;,&#xd;
         &quot;timeService2&quot;: &quot;1000&quot;,&#xd;
