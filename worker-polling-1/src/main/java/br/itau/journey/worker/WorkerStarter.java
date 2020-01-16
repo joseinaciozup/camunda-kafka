@@ -39,10 +39,10 @@ public class WorkerStarter {
     public void start() {
         log.info("[{}}] - Starting...", WORKER_POLLING);
 
-        List<FetchAndLockResponse> tasks = findPendentTasks();
+        List<FetchAndLockResponse> tasks = findPendentTasks(WORKER_POLLING, WORKER_ID);
         tasks.stream().forEach(t -> {
             try {
-                executionTask(t);
+                executionTask(t, WORKER_POLLING, WORKER_ID);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -50,12 +50,28 @@ public class WorkerStarter {
         log.info("[{}}] - End...", WORKER_POLLING);
     }
 
-    private List<FetchAndLockResponse> findPendentTasks() {
-        return consumerService.getTasksByTopic(WORKER_POLLING, WORKER_ID);
+    @Scheduled(fixedDelayString = "${camunda.worker-schedule}")
+    @Async("workerPollingAsync")
+    public void start2() {
+        log.info("[{}}] - Starting...", WORKER_POLLING+"Test");
+
+        List<FetchAndLockResponse> tasks = findPendentTasks(WORKER_POLLING+"Test", WORKER_ID+"Test");
+        tasks.stream().forEach(t -> {
+            try {
+                executionTask(t, WORKER_POLLING+"Test", WORKER_ID+"Test");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+        log.info("[{}}] - End...", WORKER_POLLING+"Test");
     }
 
-    private String executionTask(FetchAndLockResponse fetchAndLockResponse) throws JSONException {
-        log.info("[{}}] - Execution Task Starting...", WORKER_POLLING);
+    private List<FetchAndLockResponse> findPendentTasks(String workerPolling, String workerId) {
+        return consumerService.getTasksByTopic(workerPolling, workerId);
+    }
+
+    private String executionTask(FetchAndLockResponse fetchAndLockResponse, String workingPolling, String workerId) throws JSONException {
+        log.info("[{}}] - Execution Task Starting...", workingPolling);
         if (!isIncident(fetchAndLockResponse.getVariables())) {
             try {
                 HashMap<String, Object> variables = new HashMap<>();
@@ -69,13 +85,13 @@ public class WorkerStarter {
 
                 Thread.sleep(Long.parseLong(time));
 
-                consumerService.completeTask(fetchAndLockResponse, WORKER_ID);
+                consumerService.completeTask(fetchAndLockResponse, workerId);
             } catch (InterruptedException | JSONException e) {
                 handlerFailure(fetchAndLockResponse);
                 e.printStackTrace();
             }
-            log.info("[{}}] - Execution Task End...", WORKER_POLLING);
-            return "Executando a API [{" + WORKER_ID + "}]";
+            log.info("[{}}] - Execution Task End...", workingPolling);
+            return "Executando a API [{" + workerId + "}]";
         } else {
             handlerFailure(fetchAndLockResponse);
             return StringUtils.EMPTY;
