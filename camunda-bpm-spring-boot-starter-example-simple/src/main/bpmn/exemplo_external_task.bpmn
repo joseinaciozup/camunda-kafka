@@ -40,7 +40,7 @@
       <bpmn:serviceTask id="Task_0glp7bx" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
         <bpmn:extensionElements>
           <camunda:inputOutput>
-            <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+            <camunda:inputParameter name="step">A</camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_1hybf0f</bpmn:incoming>
@@ -49,7 +49,7 @@
       <bpmn:serviceTask id="Task_1bpnpvz" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
         <bpmn:extensionElements>
           <camunda:inputOutput>
-            <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+            <camunda:inputParameter name="step">A</camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_0gdb43n</bpmn:incoming>
@@ -74,7 +74,7 @@
       <bpmn:serviceTask id="Task_08zkaab" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
         <bpmn:extensionElements>
           <camunda:inputOutput>
-            <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+            <camunda:inputParameter name="step">A</camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_0hads3e</bpmn:incoming>
@@ -95,7 +95,7 @@
     <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0k3cyqk</bpmn:incoming>
@@ -110,7 +110,7 @@
     <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
@@ -119,7 +119,7 @@
     <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_159oqbq</bpmn:incoming>

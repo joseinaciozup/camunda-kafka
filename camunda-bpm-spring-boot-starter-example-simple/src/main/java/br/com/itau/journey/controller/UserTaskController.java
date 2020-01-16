@@ -24,21 +24,21 @@ public class UserTaskController {
     private final FormService formService;
 
     @PostMapping("selecionaLoja/{processInstanceId}/complete")
-    public Map<String,Object> selecionaLoja(@PathVariable(value = "processInstanceId") String processInstanceId){
+    public void selecionaLoja(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
         formParams.put("name_loja","Extra");
 
         compleUserTask(processInstanceId, formParams);
 
-        return getVariablesProcess(processInstanceId);
+        //return getVariablesProcess(processInstanceId);
 
     }
 
 
 
     @PostMapping("selecionaDados/{processInstanceId}/complete")
-    public Map<String,Object> selecionaDados(@PathVariable(value = "processInstanceId") String processInstanceId){
+    public void selecionaDados(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
         formParams.put("name","teste - nome");
@@ -46,17 +46,17 @@ public class UserTaskController {
 
         compleUserTask(processInstanceId, formParams);
 
-        return getVariablesProcess(processInstanceId);
+        //return getVariablesProcess(processInstanceId);
     }
 
     @PostMapping("selecionaOferta/{processInstanceId}/complete")
-    public Map<String,Object> selecionaOferta(@PathVariable(value = "processInstanceId") String processInstanceId){
+    public void selecionaOferta(@PathVariable(value = "processInstanceId") String processInstanceId){
 
         Map<String,Object> formParams = new HashMap<>();
         formParams.put("ofeta_id","cartao-de-credito");
         compleUserTask(processInstanceId, formParams);
 
-        return getVariablesProcess(processInstanceId);
+        //return getVariablesProcess(processInstanceId);
     }
 
     @PostMapping("finalizaTermo/{processInstanceId}/complete")

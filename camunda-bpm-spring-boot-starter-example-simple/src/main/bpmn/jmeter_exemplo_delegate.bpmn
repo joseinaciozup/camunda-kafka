@@ -4,7 +4,7 @@
     <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api Controller1" camunda:delegateExpression="${apiService1Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_06ognma</bpmn:incoming>
@@ -18,7 +18,7 @@
     <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api Controller2" camunda:delegateExpression="${apiService2Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
@@ -27,7 +27,7 @@
     <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">B</camunda:inputParameter>
+          <camunda:inputParameter name="step">B</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_159oqbq</bpmn:incoming>
@@ -44,7 +44,7 @@
     <bpmn:serviceTask id="ServiceTask_0qfgb74" name="Api&#10; Controller1&#10;" camunda:delegateExpression="${apiService1Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+          <camunda:inputParameter name="step">A</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0jx3ks5</bpmn:incoming>
@@ -63,7 +63,7 @@
     <bpmn:serviceTask id="ServiceTask_0nb13pb" name="Api&#10; Controller2&#10;" camunda:delegateExpression="${apiService2Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+          <camunda:inputParameter name="step">A</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1uucxfv</bpmn:incoming>
@@ -72,7 +72,7 @@
     <bpmn:serviceTask id="ServiceTask_0ot849i" name="Api &#10;Controller3&#10;" camunda:delegateExpression="${apiService3Task}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Valor">A</camunda:inputParameter>
+          <camunda:inputParameter name="step">A</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0mc92ri</bpmn:incoming>
