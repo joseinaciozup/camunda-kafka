@@ -2,11 +2,11 @@ spring.application.name: simpleApplication
 spring:
   datasource:
     hikari:
-      minIdle: 100
-      idle-timeout: 300000
-      maximumPoolSize: 300
-      connectionTimeout: 300000
-      leakDetectionThreshold: 300000
+      minIdle: 1000
+      idle-timeout: 3000000
+      maximumPoolSize: 3000
+      connectionTimeout: 3000000
+      leakDetectionThreshold: 3000000
     url: jdbc:postgresql://localhost:5432/journey
     username: uaiso
     password: 123456
