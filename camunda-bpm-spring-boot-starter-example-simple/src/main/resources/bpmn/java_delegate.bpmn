@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
-  <bpmn:process id="exemplo_delegate" name="exemplo_delegate" isExecutable="true">
+  <bpmn:process id="java_delegate" name="java_delegate" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_0o9l2l3</bpmn:outgoing>
     </bpmn:startEvent>
@@ -154,7 +154,7 @@
   </bpmn:process>
   <bpmn:error id="Error_00guyhc" name="Error_3b702i6" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="exemplo_delegate">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="java_delegate">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="202" width="36" height="36" />
       </bpmndi:BPMNShape>
