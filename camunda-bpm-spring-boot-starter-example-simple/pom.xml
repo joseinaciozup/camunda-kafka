@@ -14,9 +14,28 @@
 
   <properties>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <camunda.spring.boot.starter.version>3.3.5</camunda.spring.boot.starter.version>
+
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+      <version>${camunda.spring.boot.starter.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+      <version>${camunda.spring.boot.starter.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
+      <version>${camunda.spring.boot.starter.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

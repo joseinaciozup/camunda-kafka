@@ -18,7 +18,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
-        <camunda.spring.boot.starter.version>3.3.5</camunda.spring.boot.starter.version>
         <postgresql.version>42.2.5</postgresql.version>
         <spring-kafka.version>2.2.6.RELEASE</spring-kafka.version>
     </properties>
@@ -56,23 +55,7 @@
         <scope>test</scope>
       </dependency>
 
-      <dependency>
-        <groupId>org.camunda.bpm.springboot</groupId>
-        <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-        <version>${camunda.spring.boot.starter.version}</version>
-      </dependency>
 
-      <dependency>
-        <groupId>org.camunda.bpm.springboot</groupId>
-        <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-        <version>${camunda.spring.boot.starter.version}</version>
-      </dependency>
-
-      <dependency>
-          <groupId>org.camunda.bpm.springboot</groupId>
-          <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
-          <version>${camunda.spring.boot.starter.version}</version>
-      </dependency>
 
       <dependency>
         <groupId>org.springframework.boot</groupId>
