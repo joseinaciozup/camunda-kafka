@@ -2,90 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>camunda-kafka</artifactId>
-    <groupId>br.com.itau.journey</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>camunda-kafka</groupId>
+    <artifactId>br.com.itau.journey</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
   </parent>
 
-  <groupId>br.com.itau.journey</groupId>
   <artifactId>camunda-bpm-spring-boot-starter-example-simple</artifactId>
+  <name>camunda-bpm-spring-boot-starter-example-simple</name>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>camunda-bpm-spring-boot-starter-example-simple</name>
-
   <properties>
-    <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
-    <camunda.spring.boot.starter.version>3.3.5</camunda.spring.boot.starter.version>
-    <postgresql.version>42.2.5</postgresql.version>
-    <spring-kafka.version>2.2.6.RELEASE</spring-kafka.version>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>Greenwich.SR1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <!--&lt;!&ndash; Import dependency management from Spring Boot &ndash;&gt;-->
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring.boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <dependencies>
-
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-      <version>${camunda.spring.boot.starter.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-      <version>${camunda.spring.boot.starter.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.kafka</groupId>
-      <artifactId>spring-kafka</artifactId>
-      <version>${spring-kafka.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <optional>true</optional>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
-
-    <!--<dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>-->
 
     <dependency>
       <groupId>org.postgresql</groupId>
@@ -93,64 +29,14 @@
       <version>${postgresql.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-test</artifactId>
-      <version>${camunda.spring.boot.starter.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.extension.mockito</groupId>
-      <artifactId>camunda-bpm-mockito</artifactId>
-      <version>3.1.0</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.camunda.bpm.assert</groupId>
-      <artifactId>camunda-bpm-assert</artifactId>
-      <version>4.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>3.11.1</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.10</version>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.openfeign</groupId>
-      <artifactId>feign-jackson</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.openfeign</groupId>
-      <artifactId>feign-jackson</artifactId>
-      <version>10.2.3</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>camunda-bpm-nexus</id>
-      <name>camunda-bpm-nexus</name>
-      <url>https://app.camunda.com/nexus/content/groups/public</url>
-    </repository>
-  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.1</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
