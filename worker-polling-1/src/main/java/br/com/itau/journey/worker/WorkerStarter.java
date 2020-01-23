@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.oracle.javafx.jmx.json.JSONException;
 
 import br.com.itau.journey.camunda.rest.feign.ConsumerService;
 import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
