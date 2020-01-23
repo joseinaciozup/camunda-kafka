@@ -23,7 +23,7 @@
     </properties>
 
   <modules>  
-    <module>spring-kafka</module>
+<!--    <module>spring-kafka</module>-->
     <module>camunda-bpm-spring-boot-starter-example-simple</module>
     <module>camunda-rest-services</module>
     <module>worker-controller-1</module>
@@ -106,14 +106,13 @@
       </dependency>
 
       <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-jackson</artifactId>
       </dependency>
 
       <dependency>
-        <groupId>io.github.openfeign</groupId>
-        <artifactId>feign-jackson</artifactId>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
       </dependency>
 
       <dependency>
@@ -121,6 +120,17 @@
         <artifactId>spring-cloud-starter-openfeign</artifactId>
       </dependency>
 
+      <dependency>
+          <groupId>com.vaadin.external.google</groupId>
+          <artifactId>android-json</artifactId>
+          <version>0.0.20131108.vaadin1</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+      </dependency>
 
   </dependencies>
 
