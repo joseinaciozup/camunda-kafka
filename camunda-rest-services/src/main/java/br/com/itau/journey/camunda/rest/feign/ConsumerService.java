@@ -1,15 +1,20 @@
 package br.com.itau.journey.camunda.rest.feign;
 
-import br.com.itau.journey.camunda.rest.feign.dto.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import br.com.itau.journey.camunda.rest.feign.dto.CompleteTaskRequest;
+import br.com.itau.journey.camunda.rest.feign.dto.FailureRequest;
+import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockRequest;
+import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
+import br.com.itau.journey.camunda.rest.feign.dto.TopicRequest;
 
 @Service
 public class ConsumerService {
