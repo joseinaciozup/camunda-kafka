@@ -1,16 +1,22 @@
 package br.com.itau.journey;
 
-import br.com.itau.journey.feign.*;
-import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
+import br.com.itau.journey.feign.CamundaExternalTaskApi;
+import br.com.itau.journey.feign.CompleteTaskRequest;
+import br.com.itau.journey.feign.FetchAndLockRequest;
+import br.com.itau.journey.feign.FetchAndLockResponse;
+import br.com.itau.journey.feign.TopicRequest;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.itau.journey.camunda.rest.feign.dto.RequestControllerStartDTO;
+import br.com.itau.journey.camunda.rest.feign.dto.RequestControllerStartDTO;
 
 @RestController
 @RequestMapping("worker-controller-3")

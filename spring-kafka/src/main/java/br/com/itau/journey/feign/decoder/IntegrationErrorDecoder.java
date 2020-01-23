@@ -1,16 +1,17 @@
 package br.com.itau.journey.feign.decoder;
 
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+
 import br.com.itau.journey.feign.exception.IntegrationErrorException;
 import br.com.itau.journey.feign.exception.ResourceNotFoundException;
 import feign.Request;
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class IntegrationErrorDecoder implements ErrorDecoder {

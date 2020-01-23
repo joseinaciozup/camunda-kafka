@@ -1,6 +1,5 @@
 package br.com.itau.worker.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.itau.journey.camunda.rest.feign.dto.RequestControllerStartDTO;
+import br.com.itau.journey.camunda.rest.feign.dto.RequestControllerStartDTO;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("worker-controller-1")
