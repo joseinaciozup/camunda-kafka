@@ -5,5 +5,9 @@ camunda:
   worker-topic: Worker-Polling-1
   worker-id: Worker-Polling-1
   worker-schedule: 5000
-  worker-thread: 5
-  worker-max-queue-size: 3
+  worker-max-taks: 10
+  worker-starter-thread: 5
+  worker-starter-max-queue-size: 3
+  worker-service-thread: 10
+  worker-service-max-queue-size: 1
+  worker-time: time1

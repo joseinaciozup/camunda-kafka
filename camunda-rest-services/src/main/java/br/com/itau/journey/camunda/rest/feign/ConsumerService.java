@@ -1,23 +1,20 @@
 package br.com.itau.journey.camunda.rest.feign;
 
+import br.com.itau.journey.camunda.rest.feign.dto.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import br.com.itau.journey.camunda.rest.feign.dto.CompleteTaskRequest;
-import br.com.itau.journey.camunda.rest.feign.dto.FailureRequest;
-import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockRequest;
-import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
-import br.com.itau.journey.camunda.rest.feign.dto.TopicRequest;
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class ConsumerService {
+
+    private static final Logger log = LoggerFactory.getLogger(ConsumerService.class);
 
     private CamundaExternalTaskApi camundaExternalTaskApi;
 
@@ -26,11 +23,11 @@ public class ConsumerService {
         this.camundaExternalTaskApi = camundaExternalTaskApi;
     }
 
-    public List<FetchAndLockResponse> getTasksByTopic(String camundaTopic, String workerId) {
+    public List<FetchAndLockResponse> getTasksByTopic(String camundaTopic, String workerId, Integer maxTasks) {
         log.info("[Camunda Service Rest] - GETING TASK BY TOPIC [{}], WORKER ID [{}]", camundaTopic, workerId);
         List<FetchAndLockResponse> fetchAndLockResponses = camundaExternalTaskApi.fetchAndLock(FetchAndLockRequest.builder()
                 .workerId(workerId)
-                .maxTasks(1)
+                .maxTasks(maxTasks)
                 .usePriority(true)
                 .topics(Arrays.asList(TopicRequest.builder()
                         .topicName(camundaTopic)
