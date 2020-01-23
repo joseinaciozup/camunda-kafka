@@ -1,4 +1,4 @@
-package br.com.itau.journey.service;
+package java.br.com.itau.journey.service;
 
 import br.com.itau.journey.camunda.rest.feign.ConsumerService;
 import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -31,7 +32,8 @@ public class WorkerService {
     @Autowired
     private ConsumerService consumerService;
 
-    public void executionTask(FetchAndLockResponse fetchAndLockResponse, String workingPolling, String workerId) throws JSONException {
+    @Async("workerPollingAsyncService")
+    public String executionTask(FetchAndLockResponse fetchAndLockResponse, String workingPolling, String workerId) throws JSONException {
         log.info("[{}}] - Execution Task Starting...", workingPolling);
         if (!isIncident(fetchAndLockResponse.getVariables())) {
             try {
@@ -52,8 +54,10 @@ public class WorkerService {
                 e.printStackTrace();
             }
             log.info("[{}}] - Execution Task End...", workingPolling);
+            return "Executando a API [{" + workerId + "}]";
         } else {
             handlerFailure(fetchAndLockResponse);
+            return StringUtils.EMPTY;
         }
     }
 

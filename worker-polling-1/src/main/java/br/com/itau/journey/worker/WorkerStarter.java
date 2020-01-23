@@ -41,13 +41,19 @@ public class WorkerStarter {
 
         List<FetchAndLockResponse> tasks = findPendentTasks(WORKER_POLLING, WORKER_ID, WORKER_MAX_TASKS);
         tasks.stream().forEach(t -> {
+            startThread(t);
+        });
+        log.info("[{}}] - End...", WORKER_POLLING);
+    }
+
+    private void startThread(FetchAndLockResponse t) {
+        new Thread(() -> {
             try {
                 workerService.executionTask(t, WORKER_POLLING, WORKER_ID);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        });
-        log.info("[{}}] - End...", WORKER_POLLING);
+        }).start();
     }
 
     private List<FetchAndLockResponse> findPendentTasks(String workerPolling, String workerId, Integer maxTasks) {

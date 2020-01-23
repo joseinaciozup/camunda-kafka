@@ -1,4 +1,4 @@
-package br.com.itau.journey;
+package java.br.com.itau.journey;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class WorkerPollingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorkerPollingApplication.class, args);
+		SpringApplication.run(br.com.itau.journey.WorkerPollingApplication.class, args);
 	}
 
 }

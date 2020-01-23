@@ -1,4 +1,4 @@
-package br.com.itau.journey;
+package java.br.com.itau.journey;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class WorkerPolingAsync {
 
     @Bean(name = "workerPollingAsyncStarter")
-    public Executor executorStarter(@Value("${camunda.worker-thread}") int qtdThread,
-                             @Value("${camunda.worker-max-queue-size}") int maxQueueSize) {
+    public Executor executorStarter(@Value("${camunda.worker-starter-thread}") int qtdThread,
+                             @Value("${camunda.worker-starter-max-queue-size}") int maxQueueSize) {
         return new ThreadPoolExecutor(qtdThread, qtdThread, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(maxQueueSize));
     }
 }
