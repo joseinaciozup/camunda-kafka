@@ -1,4 +1,4 @@
-package br.com.itau.journey.worker;
+package java.br.com.itau.journey.worker;
 
 import br.com.itau.journey.camunda.rest.feign.ConsumerService;
 import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
@@ -41,19 +41,15 @@ public class WorkerStarter {
 
         List<FetchAndLockResponse> tasks = findPendentTasks(WORKER_POLLING, WORKER_ID, WORKER_MAX_TASKS);
         tasks.stream().forEach(t -> {
-            startThread(t);
+            new Thread(() -> {
+                try {
+                    workerService.executionTask(t, WORKER_POLLING, WORKER_ID);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         });
         log.info("[{}}] - End...", WORKER_POLLING);
-    }
-
-    private void startThread(FetchAndLockResponse t) {
-        new Thread(() -> {
-            try {
-                workerService.executionTask(t, WORKER_POLLING, WORKER_ID);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }).start();
     }
 
     private List<FetchAndLockResponse> findPendentTasks(String workerPolling, String workerId, Integer maxTasks) {

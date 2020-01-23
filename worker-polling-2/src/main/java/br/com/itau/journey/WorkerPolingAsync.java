@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 @EnableAsync
 public class WorkerPolingAsync {
 
-    @Bean(name = "workerPollingAsync")
-    public Executor executor(@Value("${camunda.worker-thread}") int qtdThread,
+    @Bean(name = "workerPollingAsyncStarter")
+    public Executor executorStarter(@Value("${camunda.worker-thread}") int qtdThread,
                              @Value("${camunda.worker-max-queue-size}") int maxQueueSize) {
         return new ThreadPoolExecutor(qtdThread, qtdThread, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(maxQueueSize));
     }
