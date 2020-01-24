@@ -20,13 +20,16 @@ public class WorkerStarter {
     private static final Logger log = LoggerFactory.getLogger(ConsumerService.class);
 
     @Value("${camunda.worker-topic}")
-    private String WORKER_POLLING;
+    private String WORKER_TOPIC;
 
     @Value("${camunda.worker-id}")
     private String WORKER_ID;
 
     @Value("${camunda.worker-max-taks}")
     private Integer WORKER_MAX_TASKS;
+
+    @Value("${camunda.worker-multiple-topics}")
+    private List<String> TOPIC_LIST;
 
     @Autowired
     private ConsumerService consumerService;
@@ -36,20 +39,24 @@ public class WorkerStarter {
 
     @Scheduled(fixedDelayString = "${camunda.worker-schedule}")
     @Async("workerPollingAsyncStarter")
-    public void start() {
-        log.info("[{}}] - Starting...", WORKER_POLLING);
+    public void startStarter() {
+        TOPIC_LIST.stream().forEach(topic ->
+            {
+                log.info("[{}}] - Starting...", topic);
 
-        List<FetchAndLockResponse> tasks = findPendentTasks(WORKER_POLLING, WORKER_ID, WORKER_MAX_TASKS);
-        tasks.stream().forEach(t -> {
-            startThread(t);
-        });
-        log.info("[{}}] - End...", WORKER_POLLING);
+                List<FetchAndLockResponse> tasks = findPendentTasks(topic, WORKER_ID, WORKER_MAX_TASKS);
+                tasks.stream().forEach(t -> {
+                    startThread(t, topic, WORKER_ID);
+                });
+                log.info("[{}}] - End...", topic);
+            }
+        );
     }
 
-    private void startThread(FetchAndLockResponse t) {
+    private void startThread(FetchAndLockResponse task, String workerTopic, String workerId) {
         new Thread(() -> {
             try {
-                workerService.executionTask(t, WORKER_POLLING, WORKER_ID);
+                workerService.executionTask(task, workerTopic, workerId);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

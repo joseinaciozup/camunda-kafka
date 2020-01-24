@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class RequestStartDTO {
 
     private String bpmnInstance;
+    private boolean sync;
     private VariablesStartDTO variables;
 }
