@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1hgbojh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
-  <bpmn:process id="jmeter_external_task" name="jmeter_external_task" isExecutable="true">
-    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
+  <bpmn:process id="jmeter_external_task_order_priority" name="jmeter_external_task_order_priority" isExecutable="true">
+    <bpmn:serviceTask id="ServiceTask_1f6jrso" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1" camunda:taskPriority="1">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">B</camunda:inputParameter>
@@ -15,7 +15,7 @@
       <bpmn:outgoing>SequenceFlow_0h7b0qg</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_159oqbq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
+    <bpmn:serviceTask id="ServiceTask_08cu32i" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2" camunda:taskPriority="1">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">B</camunda:inputParameter>
@@ -24,7 +24,7 @@
       <bpmn:incoming>SequenceFlow_0h7b0qg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03bxzjb</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
+    <bpmn:serviceTask id="ServiceTask_0fo1ch6" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3" camunda:taskPriority="1">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">B</camunda:inputParameter>
@@ -103,7 +103,7 @@
       <bpmn:outgoing>SequenceFlow_1p04bq1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_08ux5ei</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_1lfcq7t" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2">
+    <bpmn:serviceTask id="ServiceTask_1lfcq7t" name="Api - Service2" camunda:type="external" camunda:topic="Worker-Polling-2" camunda:taskPriority="2">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">A</camunda:inputParameter>
@@ -112,7 +112,7 @@
       <bpmn:incoming>SequenceFlow_08ux5ei</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_09fghki</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_11t9o15" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3">
+    <bpmn:serviceTask id="ServiceTask_11t9o15" name="Api - Service3" camunda:type="external" camunda:topic="Worker-Polling-3" camunda:taskPriority="2">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">A</camunda:inputParameter>
@@ -125,7 +125,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1p04bq1" sourceRef="ExclusiveGateway_06f4d64" targetRef="ServiceTask_11t9o15">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${valueDirection==3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="ServiceTask_04a955k" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1">
+    <bpmn:serviceTask id="ServiceTask_04a955k" name="Api - Service1" camunda:type="external" camunda:topic="Worker-Polling-1" camunda:taskPriority="2">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="step">A</camunda:inputParameter>
@@ -157,7 +157,7 @@
     <bpmn:categoryValue id="CategoryValue_1tn06ca" value="Step C" />
   </bpmn:category>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="jmeter_external_task">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="jmeter_external_task_order_priority">
       <bpmndi:BPMNShape id="ServiceTask_1f6jrso_di" bpmnElement="ServiceTask_1f6jrso">
         <dc:Bounds x="619" y="207" width="100" height="80" />
       </bpmndi:BPMNShape>
