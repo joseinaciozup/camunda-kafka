@@ -1,18 +1,15 @@
-package br.com.itau.journey.feign;
+package br.com.itau.journey;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
-public class TopicRequest {
+public class ValueVariableDTO {
 
-    private String topicName;
-
-    private Long lockDuration;
-
+    private String value;
 }

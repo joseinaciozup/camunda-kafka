@@ -1,5 +1,6 @@
 package br.com.itau.journey.feign;
 
+import br.com.itau.journey.camunda.rest.feign.CamundaExternalTaskApi;
 import feign.Logger;
 import feign.slf4j.Slf4jLogger;
 import org.springframework.context.annotation.Bean;

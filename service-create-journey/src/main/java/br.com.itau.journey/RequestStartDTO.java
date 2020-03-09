@@ -1,4 +1,4 @@
-package br.com.itau.journey.dto;
+package br.com.itau.journey;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

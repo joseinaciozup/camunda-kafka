@@ -1,11 +1,12 @@
 package br.com.itau.journey.controller;
 
+import br.com.itau.journey.CorrelationId;
+import br.com.itau.journey.Message;
+import br.com.itau.journey.dispatcher.KafkaDispatcher;
 import br.com.itau.journey.dto.RequestStartDTO;
-import br.com.itau.journey.dto.VariablesStartDTO;
 import lombok.RequiredArgsConstructor;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("start")
@@ -26,39 +29,20 @@ public class StartProcessInstanceController {
 
     private Map<String, String> variables = new HashMap<>();
 
+    private final KafkaDispatcher<String> dispatcher = new KafkaDispatcher<>();
+
     @PostMapping
-    public String start(@RequestBody RequestStartDTO requestStart) throws InterruptedException {
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(requestStart.getBpmnInstance(), getVariables(requestStart.getVariables()));
+    public String start(@RequestBody RequestStartDTO requestStart) throws InterruptedException, ExecutionException {
+        UUID id = UUID.randomUUID();
+        Message message = new Message(new CorrelationId("Start"), "Start");
 
-        if (requestStart.isSync()) {
-           waitingProcessEnd(processInstance);
+        dispatcher.send("create.journey", id.toString(), message.getId().continueWith(StartProcessInstanceController.class.getSimpleName()), requestStart.toString());
+
+
+        while {
+            lendo no topico end.journey se a instancia id = 1234
         }
 
-        return processInstance.getProcessInstanceId();
-    }
-
-    private void waitingProcessEnd(ProcessInstance processInstance) throws InterruptedException {
-        boolean x = true;
-        while (x) {
-            Thread.sleep(5000);
-            x = processEngine
-                    .getRuntimeService()
-                    .createProcessInstanceQuery()
-                    .processInstanceId(processInstance.getId())
-                    .singleResult() != null;
-        }
-    }
-
-    private Map<String, Object> getVariables(VariablesStartDTO variablesStartDTO) {
-        Map<String, Object> variables = new HashMap<>();
-
-        variables.put("time1", variablesStartDTO.getTimeService1());
-        variables.put("time2", variablesStartDTO.getTimeService2());
-        variables.put("time3", variablesStartDTO.getTimeService3());
-        variables.put("directionA", variablesStartDTO.getDirectionA());
-        variables.put("directionB", variablesStartDTO.getDirectionB());
-        variables.put("valueDirection", 0);
-
-        return variables;
+        return "Journey Creating!";
     }
 }
