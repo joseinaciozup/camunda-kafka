@@ -27,6 +27,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
 import org.camunda.bpm.engine.impl.bpmn.behavior.ExternalTaskActivityBehavior;
+import org.camunda.bpm.engine.impl.bpmn.behavior.TerminateEndEventActivityBehavior;
 import org.camunda.bpm.engine.impl.bpmn.parser.AbstractBpmnParseListener;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParseListener;
 import org.camunda.bpm.engine.impl.bpmn.parser.BpmnParser;
@@ -179,20 +180,34 @@ public class ApplicationContextConfiguration {
 
         public class RegisterExternalTaskBpmnParseListener extends AbstractBpmnParseListener {
 
-
             @Override
-            public void parseServiceTask(Element serviceTaskElement, ScopeImpl scope, ActivityImpl activity) {
+            public void parseEndEvent(Element endEventElement, ScopeImpl scope, ActivityImpl activity) {
 
                 ActivityBehavior activityBehavior = activity.getActivityBehavior();
-                if (activityBehavior instanceof ExternalTaskActivityBehavior) {
-                    List<String> kafkaTopics = ofNullable(serviceTaskElement.element(EXTENSION_ELEMENTS))
+                if (activityBehavior instanceof TerminateEndEventActivityBehavior) {
+                    List<String> kafkaTopics = ofNullable(endEventElement.element(EXTENSION_ELEMENTS))
                             .map(getPropertiesElement())
                             .map(getPropertyList())
                             .map(getFilteredTopicList()).orElse(new ArrayList<>());
 
-                    activity.addListener(START_EVENT, getExecutionListener(kafkaTopics, serviceTaskElement.attributeNS(CAMUNDA_BPMN_EXTENSIONS_NS, TOPIC)));
+                    activity.addListener(START_EVENT, getExecutionListener(kafkaTopics, endEventElement.attributeNS(CAMUNDA_BPMN_EXTENSIONS_NS, TOPIC)));
                 }
             }
+
+//            @Override
+//            public void parseServiceTask(Element serviceTaskElement, ScopeImpl scope, ActivityImpl activity) {
+//
+//                ActivityBehavior activityBehavior = activity.getActivityBehavior();
+//                if (activityBehavior instanceof ExternalTaskActivityBehavior) {
+//                    List<String> kafkaTopics = ofNullable(serviceTaskElement.element(EXTENSION_ELEMENTS))
+//                            .map(getPropertiesElement())
+//                            .map(getPropertyList())
+//                            .map(getFilteredTopicList()).orElse(new ArrayList<>());
+//
+//                    activity.addListener(START_EVENT, getExecutionListener(kafkaTopics, serviceTaskElement.attributeNS(CAMUNDA_BPMN_EXTENSIONS_NS, TOPIC)));
+//                }
+//            }
+
 
             private ExecutionListener getExecutionListener(List<String> kafkaTopics, String camundaTopic) {
                 return execution -> {

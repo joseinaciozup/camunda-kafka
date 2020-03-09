@@ -75,6 +75,27 @@ public class ConsumerService {
         getRunnable(ack);
     }
 
+    @KafkaListener(
+            id = "externalTaskTestProcessor",
+            topics = "${create.journey.topic.name}",
+            containerFactory = "kafkaListenerContainerFactory")
+    public void greetingListenerEndEvent(KafkaExternalTask data, Acknowledgment ack) {
+
+        log.info("Kafka-Audit: " + data.toString());
+        List<FetchAndLockResponse> fetchAndLockResponses = camundaExternalTaskApi.fetchAndLock(FetchAndLockRequest.builder()
+                .workerId(TEST_EXTERNAL_WORKER_ID)
+                .maxTasks(1)
+                .usePriority(true)
+                .topics(Arrays.asList(TopicRequest.builder()
+                        .topicName(data.getCamundaTopic())
+                        .lockDuration(60000L)
+                        .build()))
+                .build());
+        fetchAndLockResponses.get(0);
+        fetchAndLockResponses.forEach(processFetchAndLockResponseConsumer());
+        getRunnable(ack);
+    }
+
 
     @NotNull
     private Consumer<Throwable> getError() {
