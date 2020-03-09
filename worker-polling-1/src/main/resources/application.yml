@@ -6,7 +6,8 @@ camunda:
   worker-id: Worker-Polling-1
   worker-schedule: 5000
   worker-max-taks: 3
-  worker-thread: 10
+  worker-taks-thread: 10
+  worker-polling-thread: 5
   worker-max-queue-size: 10
   worker-time: time1
   worker-multiple-topics: "Worker-Polling-1, Worker-Polling-1B, Worker-Polling-1C"

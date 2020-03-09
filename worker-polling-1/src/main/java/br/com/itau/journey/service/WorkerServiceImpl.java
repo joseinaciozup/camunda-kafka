@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class WorkerService {
+public class WorkerServiceImpl implements WorkerService {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumerService.class);
 
@@ -32,7 +32,7 @@ public class WorkerService {
     @Autowired
     private ConsumerService consumerService;
 
-    @Async("workerPollingAsyncThreads")
+    @Override
     public void executionTask(FetchAndLockResponse fetchAndLockResponse, String workingPolling, String workerId) throws JSONException {
         new Thread(() -> {
             try {

@@ -4,6 +4,7 @@ import java.util.List;
 import br.com.itau.journey.camunda.rest.feign.ConsumerService;
 import br.com.itau.journey.camunda.rest.feign.dto.FetchAndLockResponse;
 import br.com.itau.journey.service.WorkerService;
+import br.com.itau.journey.service.WorkerServiceImpl;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,22 +46,16 @@ public class WorkerStarter {
                 log.info("[{}}] - Starting...", topic);
 
                 List<FetchAndLockResponse> tasks = findPendentTasks(topic, WORKER_ID, WORKER_MAX_TASKS);
-                tasks.stream().forEach(t -> {
-                    startThread(t, topic, WORKER_ID);
+                tasks.stream().forEach(task -> {
+                    try {
+                        workerService.executionTask(task, topic, WORKER_ID);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 });
                 log.info("[{}}] - End...", topic);
             }
         );
-    }
-
-    private void startThread(FetchAndLockResponse task, String workerTopic, String workerId) {
-        new Thread(() -> {
-            try {
-                workerService.executionTask(task, workerTopic, workerId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }).start();
     }
 
     private List<FetchAndLockResponse> findPendentTasks(String workerPolling, String workerId, Integer maxTasks) {

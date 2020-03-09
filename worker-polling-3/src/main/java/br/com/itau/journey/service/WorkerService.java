@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -31,30 +32,37 @@ public class WorkerService {
     @Autowired
     private ConsumerService consumerService;
 
+    @Async("workerPollingAsyncThreads")
     public void executionTask(FetchAndLockResponse fetchAndLockResponse, String workingPolling, String workerId) throws JSONException {
-        log.info("[{}}] - Execution Task Starting...", workingPolling);
-        if (!isIncident(fetchAndLockResponse.getVariables())) {
+        new Thread(() -> {
             try {
-                HashMap<String, Object> variables = new HashMap<>();
-                final String time = getVariable(fetchAndLockResponse.getVariables(), WORKER_TIME);
-                final String step = getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.STEP.getDescricao());
+                log.info("[{}}] - Execution Task Starting...", workingPolling);
+                if (!isIncident(fetchAndLockResponse.getVariables())) {
+                    try {
+                        HashMap<String, Object> variables = new HashMap<>();
+                        final String time = getVariable(fetchAndLockResponse.getVariables(), WORKER_TIME);
+                        final String step = getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.STEP.getDescricao());
 
-                final String direction = getDirection(fetchAndLockResponse, step);
+                        final String direction = getDirection(fetchAndLockResponse, step);
 
-                variables.put("valueDirection", Integer.valueOf(direction));
-                fetchAndLockResponse.setVariables(variables);
+                        variables.put("valueDirection", Integer.valueOf(direction));
+                        fetchAndLockResponse.setVariables(variables);
 
-                Thread.sleep(Long.parseLong(time));
+                        Thread.sleep(Long.parseLong(time));
 
-                consumerService.completeTask(fetchAndLockResponse, workerId);
-            } catch (InterruptedException | JSONException e) {
-                handlerFailure(fetchAndLockResponse);
+                        consumerService.completeTask(fetchAndLockResponse, workerId);
+                    } catch (InterruptedException | JSONException e) {
+                        handlerFailure(fetchAndLockResponse);
+                        e.printStackTrace();
+                    }
+                    log.info("[{}}] - Execution Task End...", workingPolling);
+                } else {
+                    handlerFailure(fetchAndLockResponse);
+                }
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
-            log.info("[{}}] - Execution Task End...", workingPolling);
-        } else {
-            handlerFailure(fetchAndLockResponse);
-        }
+        }).start();
     }
 
     private boolean isIncident(Map variables) throws JSONException {
@@ -62,7 +70,7 @@ public class WorkerService {
     }
 
     private String getDirection(FetchAndLockResponse fetchAndLockResponse, String step) throws JSONException {
-        return "A".equals(step) ? getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_A.getDescricao()):
+        return "A".equals(step) ? getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_A.getDescricao()) :
                 getVariable(fetchAndLockResponse.getVariables(), CamundaConstants.DIRECTION_B.getDescricao());
     }
 
